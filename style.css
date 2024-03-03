@@ -1,0 +1,942 @@
+:root {
+  --dogSprite-width: 60px;
+  --dogSprite-height: 55px;
+  --duckSprite-width: 37px;
+  --duckSprite-height: 37px;
+}
+
+body {
+  background-color: deepskyblue;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* Start screen */
+@font-face {
+  font-family: "M29_DUCK HOUND";
+  src: url("resources/fonts/M29_DUCKHOUND.woff2") format("woff2"),
+    url("resources/fonts/M29_DUCKHOUND.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ArcadeClassic";
+  src: url("resources/fonts/ArcadeClassic.woff2") format("woff2"),
+    url("resources/fonts/ArcadeClassic.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.main-menu-container,
+.title {
+  display: flex;
+  align-items: center;
+}
+
+.skyArea {
+  top: 0px;
+  position: absolute;
+  height: 75vh;
+  width: 100vw;
+  z-index: -1;
+}
+
+.main-menu-container {
+  background-image: url("images/backgroundImage.png");
+  background-size: 100% 100%;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  cursor: url("images/target.png") 16 16, auto;
+}
+
+.info {
+  text-align: center;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.865);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 5vh;
+}
+
+.info p {
+  font-size: 3vh;
+  color: orange;
+  font-weight: bold;
+  text-align: justify;
+}
+
+.title {
+  position: relative;
+  top: -15%;
+  flex-direction: column;
+}
+
+.logo {
+  background-image: url("images/pauseMenuImage.png");
+  background-size: 100% 100%;
+  width: 34vw;
+  height: 40vh;
+  background-repeat: no-repeat;
+}
+
+#start-button,
+#info-button,
+#return-button {
+  font-family: "M29_DUCK HOUND";
+  padding: 7px 60px;
+  font-size: 24px;
+  background-color: #fc9732;
+  color: #ffffff;
+  border: none;
+  border-radius: 16px;
+  margin: 10px;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+#start-button:hover,
+#info-button:hover,
+#return-button:hover {
+  background-color: #0dff00f5;
+}
+
+.score {
+  font-family: "M29_DUCK HOUND";
+  font-size: 23px;
+  text-align: center;
+  color: #0dff00f5;
+}
+
+.copyright {
+  font-family: "M29_DUCK HOUND";
+  padding-top: 17px;
+  font-size: 23px;
+  text-align: center;
+  color: #ffffff;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Game screen */
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.shootingArea {
+  position: absolute;
+  justify-self: start;
+  height: 75vh;
+  width: 100vw;
+}
+
+.startGame {
+  position: absolute;
+  font-family: "ArcadeClassic";
+  src: url("resources/fonts/ArcadeClassic.woff2") format("woff2"),
+    url("resources/fonts/ArcadeClassic.woff") format("woff");
+  font-size: 4em;
+  width: 100vw;
+  height: 5vh;
+  text-align: center;
+  top: 30%;
+  z-index: 9;
+  animation: animatePause 1s steps(1) infinite;
+}
+
+#gameContainer {
+  position: relative;
+  background-image: url("images/backgroundImage.png");
+  background-size: 100% 100%;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  cursor: url("images/target.png") 16 16, auto;
+}
+
+.gameInfo {
+  width: 120em;
+  height: 12vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  align-self: flex-end;
+}
+
+#roundCounter,
+#score,
+.bulletContainer,
+.ducksContainer {
+  font-family: "ArcadeClassic";
+  font-size: x-large;
+  text-align: left;
+  width: 4em;
+  border: 2px solid gold;
+  background-color: black;
+  border-radius: 0.75em;
+  color: snow;
+  text-align: center;
+}
+
+.pauseButton {
+  display: none;
+}
+
+.scoreContainer {
+  display: grid;
+  grid-template-rows: 2fr;
+  grid-template-columns: 1fr;
+}
+
+#score {
+  padding-top: 6px;
+  grid-row: 2 / 3;
+  position: absolute;
+  width: 8em;
+  height: 1.5em;
+}
+
+.addScore {
+  grid-row: 2 / 3;
+  width: 7em;
+  height: 1.5em;
+  text-align: center;
+  padding-left: 30px;
+  font-family: "ArcadeClassic";
+  font-size: 30px;
+  color: white;
+  overflow: hidden;
+  margin-top: 0%;
+}
+
+.toggleScoreAnimation {
+  animation: slide 2s linear;
+}
+
+.bulletContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 5em;
+  height: 2.5em;
+}
+
+.gameText {
+  font-size: x-large;
+  color: darkorchid;
+}
+
+.bullets {
+  display: flex;
+  width: 3em;
+  height: 1.3em;
+}
+
+.bulletsImg {
+  background-image: url("images/bullet.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 1em;
+  height: 1.3em;
+}
+
+.ducksContainer {
+  width: 18em;
+  height: 3em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: gold;
+}
+
+.ducksTopLine {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 18em;
+  height: 1.4em;
+}
+
+.duckScoreImg {
+  background-image: url("images/emptyDuck.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 1.4em;
+  height: 1.2em;
+}
+
+#roundAnnouncer {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 75%;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  font-family: "ArcadeClassic";
+  font-size: 70px;
+  color: snow;
+  scale: 0.5;
+  color: darkorchid;
+  opacity: 1;
+  animation: fade 7s cubic-bezier(0.44, -0.18, 0.38, 1.42) forwards;
+}
+
+.roundImg {
+  background-image: url("images/duckRound.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: relative;
+  width: 40vw;
+  height: 40vw;
+}
+
+#flawlessRound {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 85%;
+  text-align: center;
+  font-family: "ArcadeClassic";
+  font-size: 40px;
+  color: darkorchid;
+  animation: fade 7s cubic-bezier(0.44, -0.18, 0.38, 1.42) forwards;
+}
+
+/* Pause menu */
+
+.pauseMenu {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  z-index: 9999;
+}
+
+.pauseOptions {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.pauseLogoImg {
+  background-image: url("images/pauseMenuImage.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 60vh;
+  height: 50vh;
+}
+
+.menuButton {
+  font-family: "ArcadeClassic";
+  font-size: x-large;
+  background-color: black;
+  color: snow;
+  border: 2px solid gold;
+  border-radius: 0.75em;
+  width: 8em;
+  height: 2em;
+  cursor: pointer;
+}
+
+#pauseTitle,
+#saveTitle,
+.gameOverText {
+  display: block;
+  width: 6em;
+  height: 2em;
+  font-family: "ArcadeClassic";
+  font-size: 50px;
+  color: snow;
+}
+
+.menuButtons {
+  width: 30em;
+  display: flex;
+  justify-self: flex-end;
+  justify-content: space-evenly;
+}
+
+.menuButton:hover {
+  background-color: lemonchiffon;
+  color: black;
+  border: 2px solid black;
+}
+
+#saveTitle {
+  text-align: center;
+  font-size: 20px;
+  width: 25em;
+  height: 2em;
+}
+
+.saveOptions {
+  display: none;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+@keyframes fade {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes slide {
+  0% {
+    transform: translate(0);
+  }
+  25% {
+    transform: translate(0, -3vh);
+  }
+  75% {
+    transform: translate(0, -3vh);
+  }
+  50% {
+    transform: translateY(1vh);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+#pauseTitle {
+  animation: animatePause 1s steps(1) infinite;
+}
+
+@keyframes animatePause {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Game over screen */
+
+.gameOverText {
+  width: 18em;
+}
+
+.gameover {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-evenly;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+}
+
+.gameOverBackground {
+  background-image: url("images/backgroundImage.png");
+  background-size: 100% 100%;
+  width: 100vw;
+  height: 100vh;
+  background-repeat: no-repeat;
+}
+
+.gameOverImage {
+  scale: 0.7;
+}
+
+#highScore {
+  font-size: 40px;
+  color: crimson;
+}
+#gameScore {
+  font-size: 30px;
+  color: gold;
+}
+
+/* General dog sprite */
+
+.dogSprite {
+  transform: scale(4);
+}
+
+.dogSprite,
+.duckSprite {
+  position: absolute;
+  background-image: url("images/character_sprites.png");
+}
+
+.dogSprite {
+  width: var(--dogSprite-width);
+  height: var(--dogSprite-height);
+}
+
+/* Dog walk animations */
+.walk {
+  animation: walk-animation 0.6s steps(1) infinite,
+    walk-movement 5s linear forwards;
+}
+
+.smell,
+.walk {
+  left: 40vw;
+  z-index: 9;
+}
+
+.walkRight,
+.walkRight2,
+.smellRight,
+.smell,
+.walk {
+  top: 78vh;
+}
+
+.walkRight {
+  animation: walk-animation 0.6s steps(1) infinite, walkRight 3s linear;
+}
+.walkRight2 {
+  animation: walk-animation 0.6s steps(1) infinite,
+    walkRight2 3s linear forwards;
+}
+.smell,
+.smellRight {
+  animation: smell-animation 0.5s steps(1) infinite;
+}
+
+.smellRight {
+  left: 40vw;
+}
+
+.jump {
+  left: 40vw;
+  z-index: -1;
+  animation: jump-animation 1.5s steps(1), jump-movement 1.5s linear forwards;
+}
+
+.paused {
+  -webkit-animation-play-state: paused;
+  -moz-animation-play-state: paused;
+  -o-animation-play-state: paused;
+  animation-play-state: paused;
+}
+
+@keyframes walk-animation {
+  0% {
+    background-position: 0 0;
+  }
+  25% {
+    background-position: calc(var(--dogSprite-width) * -1) 0;
+  }
+  50% {
+    background-position: calc(var(--dogSprite-width) * -2) 0;
+  }
+  75% {
+    background-position: calc(var(--dogSprite-width) * -3) 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+@keyframes smell-animation {
+  0% {
+    background-position: calc(var(--dogSprite-width) * -3) 0;
+  }
+  50% {
+    background-position: calc(var(--dogSprite-width) * -4) 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+@keyframes walk-movement {
+  from {
+    left: -10vw;
+  }
+  to {
+    left: 40vw;
+  }
+}
+
+@keyframes jump-animation {
+  0% {
+    background-position: 0 calc(var(--dogSprite-height) * -1);
+  }
+  20% {
+    background-position: calc(var(--dogSprite-width) * -1)
+      calc(var(--dogSprite-height) * -1);
+  }
+  50% {
+    background-position: calc(var(--dogSprite-width) * -2)
+      calc(var(--dogSprite-height) * -1);
+  }
+  100% {
+    background-position: 0 calc(var(--dogSprite-height) * -1);
+  }
+}
+
+@keyframes jump-movement {
+  0% {
+    top: 75vh;
+    z-index: 9;
+  }
+  20% {
+    top: 75vh;
+    z-index: 9;
+  }
+  50% {
+    top: 55vh;
+    z-index: -1;
+  }
+  100% {
+    top: 79vh;
+  }
+}
+
+@keyframes smellRight {
+  0% {
+    background-position: calc(var(--dogSprite-width) * -3) 0;
+  }
+  50% {
+    background-position: calc(var(--dogSprite-width) * -4) 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+@keyframes walkRight {
+  from {
+    left: -10vw;
+  }
+  to {
+    left: 40vw;
+  }
+}
+@keyframes walkRight2 {
+  from {
+    left: 40vw;
+  }
+  to {
+    left: 110vw;
+  }
+}
+/* Dog laugh animations */
+.laugh,
+.up,
+.dogDuckCaught,
+.dogDuckCaught2,
+.laughGameover {
+  top: 62vh;
+  z-index: -1;
+}
+.laugh {
+  animation: laugh-animation 0.5s steps(1) infinite,
+    upDown-animation 1s linear forwards,
+    upDown-animation 1s linear 3s reverse forwards;
+}
+.laughGameover {
+  animation: laugh-animation 0.5s steps(1) infinite,
+    upDown-animation 1s linear forwards;
+}
+
+@keyframes laugh-animation {
+  0% {
+    background-position: calc(var(--dogSprite-width) * -3)
+      calc(var(--dogSprite-height) * -1);
+  }
+  50% {
+    background-position: calc(var(--dogSprite-width) * -4)
+      calc(var(--dogSprite-height) * -1);
+  }
+  100% {
+    background-position: calc(var(--dogSprite-width) * -3)
+      calc(var(--dogSprite-height) * -1);
+  }
+}
+
+/* Dog duck caught */
+.dogDuckCaught,
+.dogDuckCaught2 {
+  animation: upDown-animation 1s linear forwards,
+    upDown-animation 1s linear 3s reverse forwards;
+}
+
+.dogDuckCaught {
+  background-position: calc(var(--dogSprite-width) * -5.3) 0;
+}
+.dogDuckCaught2 {
+  background-position: calc(var(--dogSprite-width) * -5.3)
+    calc(var(--dogSprite-height) * -1);
+}
+
+@keyframes upDown-animation {
+  0% {
+    top: 80vh;
+  }
+  100% {
+    top: 62vh;
+  }
+}
+
+/* Duck */
+.duckSprite {
+  width: var(--duckSprite-width);
+  height: var(--duckSprite-height);
+}
+
+.duckH {
+  animation: horizontalFlight 0.5s steps(1) infinite;
+}
+
+.duckV {
+  animation: verticalFlight 0.5s steps(1) infinite;
+}
+
+.duckD {
+  animation: diagonalFlight 0.5s steps(1) infinite;
+}
+
+.duckLeave {
+  animation: duckLeave 2s forwards, verticalFlight 0.5s steps(1) infinite;
+}
+
+.moveDuckAnimation {
+  animation: moveDuck 5s linear, horizontalFlight 0.7s steps(1) infinite;
+}
+
+.duckDie {
+  background-position: var(--position, 0)
+    calc(-119px - var(--duckSprite-height) * 3);
+}
+
+.duckFall {
+  background-position: calc(var(--duckSprite-width) * -1 + var(--position, 0))
+    calc(-119px - var(--duckSprite-height) * 3);
+}
+
+@keyframes horizontalFlight {
+  0% {
+    background-position: var(--position, 0) -119px;
+  }
+  33% {
+    background-position: calc(var(--duckSprite-width) * -1 + var(--position, 0)) -119px;
+  }
+  66% {
+    background-position: calc(var(--duckSprite-width) * -2 + var(--position, 0)) -119px;
+  }
+  100% {
+    background-position: var(--position, 0) -119px;
+  }
+}
+
+@keyframes diagonalFlight {
+  0% {
+    background-position: var(--position, 0)
+      calc(-119px - var(--duckSprite-height));
+  }
+  33% {
+    background-position: calc(var(--duckSprite-width) * -1 + var(--position, 0))
+      calc(-119px - var(--duckSprite-height));
+  }
+  66% {
+    background-position: calc(var(--duckSprite-width) * -2 + var(--position, 0))
+      calc(-119px - var(--duckSprite-height));
+  }
+  100% {
+    background-position: var(--position, 0)
+      calc(-119px - var(--duckSprite-height));
+  }
+}
+
+@keyframes verticalFlight {
+  0% {
+    background-position: var(--position, 0)
+      calc(-119px - var(--duckSprite-height) * 2);
+  }
+  33% {
+    background-position: calc(var(--duckSprite-width) * -1 + var(--position, 0))
+      calc(-119px - var(--duckSprite-height) * 2);
+  }
+  66% {
+    background-position: calc(var(--duckSprite-width) * -2 + var(--position, 0))
+      calc(-119px - var(--duckSprite-height) * 2);
+  }
+  100% {
+    background-position: var(--position, 0)
+      calc(-119px - var(--duckSprite-height) * 2);
+  }
+}
+
+@keyframes duckLeave {
+  from {
+    transform: scale(3) translateY(0);
+  }
+  to {
+    transform: scale(3) translateY(-100vh);
+  }
+}
+
+@keyframes moveDuck {
+  0% {
+    transform: translate(0, 0) scale(3);
+  }
+  100% {
+    transform: translate(100vw, -90vh) scale(3);
+  }
+}
+
+/* Mobile */
+
+@media screen and (max-height: 600px) {
+  .dogSprite {
+    transform: scale(2);
+  }
+  .smell,
+  .walk {
+    top: 70vh;
+  }
+
+  @keyframes jump-movement {
+    0% {
+      top: 65vh;
+      z-index: 9;
+    }
+    20% {
+      top: 65vh;
+      z-index: 9;
+    }
+    50% {
+      top: 50vh;
+      z-index: -1;
+    }
+    100% {
+      top: 67vh;
+    }
+  }
+
+  @keyframes upDown-animation {
+    0% {
+      top: 80vh;
+    }
+    100% {
+      top: 55vh;
+    }
+  }
+
+  #start-button,
+  #info-button,
+  #return-button,
+  .score,
+  .copyright {
+    font-size: 18px;
+  }
+
+  .main-menu-container {
+    cursor: none;
+  }
+
+  @keyframes moveDuck {
+    0% {
+      transform: translate(0, 0) scale(1.5);
+    }
+    100% {
+      transform: translate(100vw, -90vh) scale(1.5);
+    }
+  }
+
+  .bulletImg {
+    transform: scale(0.7);
+  }
+  .gameOverImage {
+    scale: 1;
+    width: 16vw;
+  }
+  #pauseTitle,
+  #saveTitle,
+  .gameOverText,
+  #highScore,
+  #gameScore {
+    font-size: 6vh;
+  }
+
+  .pauseButton {
+    display: inline;
+    background-color: white;
+    border: none;
+    background-image: url("images/pauseButton.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 8vh;
+    height: 8vh;
+    z-index: 9999;
+    border: 2px solid gold;
+    border-radius: 50%;
+  }
+
+  #roundCounter,
+  #score,
+  .bulletContainer,
+  .ducksContainer,
+  .gameText,
+  .addScore {
+    font-size: 4vh;
+  }
+  .startGame {
+    font-size: 8vh;
+  }
+
+  #roundAnnouncer {
+    font-size: 12vh;
+  }
+
+  .gameInfo {
+    justify-content: space-evenly;
+  }
+
+  #gameContainer {
+    cursor: none;
+  }
+
+  @keyframes slide {
+    0% {
+      transform: translate(0);
+    }
+    25% {
+      transform: translate(0, -4vh);
+    }
+    75% {
+      transform: translate(0, -4vh);
+    }
+    100% {
+      transform: translate(0);
+    }
+  }
+
+  #flawlessRound {
+    font-size: 6vh;
+  }
+
+  .pauseLogoImg {
+    width: 10em;
+    height: 10em;
+  }
+}

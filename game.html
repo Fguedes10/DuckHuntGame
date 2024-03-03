@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Duck Hunt Game</title>
+    <link rel="icon" type="image/x-icon" href="/images/duckFavicon.png" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="flawlessRound">
+      <div>FLAWLESS ROUND</div>
+      <div>+10000</div>
+    </div>
+    <div class="startGame">Click anywhere to start</div>
+    <div id="roundAnnouncer">
+      <div class="roundImg"></div>
+      <div>ROUND 1</div>
+    </div>
+    <div class="pauseMenu">
+      <div class="pauseOptions">
+        <div class="pauseLogoImg"></div>
+        <div id="pauseTitle">GAME PAUSED</div>
+        <div class="menuButtons">
+          <button id="restart" class="menuButton">
+            <a href="game.html">RESTART GAME</a>
+          </button>
+          <button id="quitToSave" class="menuButton">QUIT</button>
+        </div>
+      </div>
+      <div class="saveOptions">
+        <div class="pauseLogoImg"></div>
+        <div id="saveTitle">Do you want to save before quit game</div>
+        <div class="menuButtons">
+          <button id="saveGame" class="menuButton">
+            <a href="index.html">YES</a>
+          </button>
+          <button id="quitGame" class="menuButton">
+            <a href="index.html">No,&nbsp&nbspQuit</a>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="shootingArea"></div>
+    <div id="gameContainer">
+      <div class="gameInfo">
+        <button class="pauseButton"></button>
+        <div id="roundCounter">R = 1</div>
+        <div class="bulletContainer">
+          <div class="bullets">
+            <div id="bullet1" class="bulletsImg"></div>
+            <div id="bullet2" class="bulletsImg"></div>
+            <div id="bullet3" class="bulletsImg"></div>
+          </div>
+          <div class="gameText bulletText">SHOTS</div>
+        </div>
+        <div class="ducksContainer">
+          <div class="ducksTopLine">
+            HIT:
+            <div id="duck1" class="duckScoreImg"></div>
+            <div id="duck2" class="duckScoreImg"></div>
+            <div id="duck3" class="duckScoreImg"></div>
+            <div id="duck4" class="duckScoreImg"></div>
+            <div id="duck5" class="duckScoreImg"></div>
+            <div id="duck6" class="duckScoreImg"></div>
+            <div id="duck7" class="duckScoreImg"></div>
+            <div id="duck8" class="duckScoreImg"></div>
+            <div id="duck9" class="duckScoreImg"></div>
+            <div id="duck10" class="duckScoreImg"></div>
+          </div>
+          <div class="gameText" id="minDucks">Ducks needed to Pass: 5</div>
+        </div>
+        <div class="scoreContainer">
+          <div class="addScore">+1000</div>
+          <div id="score">SCORE : 000000</div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="module" src="script.js"></script>
+</html>
