@@ -95,6 +95,7 @@ class Game {
     this.pauseSound.pause();
     this.dog.remove();
     localStorage.removeItem("saveState");
+    localStorage.removeItem("score");
     this.reloadDuckContainer();
   }
 
@@ -262,7 +263,7 @@ class Game {
   reloadDuckContainer() {
     for (let i = 1; i <= 10; i++) {
       let duck = document.getElementById(`duck${i}`);
-      duck.src = "images/emptyDuck.jpg";
+      duck.style.backgroundImage = "url(images/emptyDuck.jpg)";
     }
   }
 
